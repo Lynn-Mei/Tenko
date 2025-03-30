@@ -1,4 +1,4 @@
-package com.example.tenko
+package com.nihonium.tenko
 
 import org.junit.Test
 
