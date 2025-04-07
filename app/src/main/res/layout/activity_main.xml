@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/Theme.Tenko.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
+        <androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
