@@ -1,9 +1,12 @@
 package com.nihonium.tenko.library
 
 class Book {
-    private var isbn: String = ""
-    private var title: String = ""
+    var isbn: String = ""
+    var title: String = ""
     private var pages: MutableList<Page> = mutableListOf()
 
-
+    constructor(id: String, title:String){
+        this.isbn = id
+        this.title = title
+    }
 }
