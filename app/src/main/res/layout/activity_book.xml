@@ -21,7 +21,6 @@
             android:id="@+id/bookCover"
             android:layout_width="90dp"
             android:layout_height="130dp"
-            android:src="@drawable/nishinomajou"
             tools:ignore="MissingConstraints"></ImageView>
 
         <TextView
@@ -29,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="西の魔女が死んだ"
+            android:text=""
             android:textSize="22dp"
             app:layout_constraintStart_toEndOf="@+id/bookCover" />
 
@@ -38,22 +37,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="梨木香歩"
+            android:text=""
             android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/bookCover"
             app:layout_constraintTop_toBottomOf="@+id/title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <view
-        class="androidx.appcompat.app.AlertController$RecycleListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pageslist"
         android:layout_width="wrap_content"
         android:layout_height="480dp"
         app:layout_constraintBottom_toTopOf="@+id/addbtn"
         app:layout_constraintTop_toBottomOf="@+id/upperdesc"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        >
 
-    </view>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/addbtn"

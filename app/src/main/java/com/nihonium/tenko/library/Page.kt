@@ -1,12 +1,14 @@
 package com.nihonium.tenko.library
 
 class Page {
-    private var number: Int = -1
+    var number: Int = -1
+    var name: String = ""
     private var kanjis: MutableList<Kanji> = mutableListOf()
     private var words: MutableList<Word> = mutableListOf()
 
     constructor(pageNumber: Int){
         this.number = pageNumber
+        this.name = "Page scan $pageNumber"
     }
 
     fun Scan(){

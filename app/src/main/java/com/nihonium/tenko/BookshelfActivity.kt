@@ -19,9 +19,9 @@ class BookshelfActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bookshelf)
 
         this.books = listOf(
-            Book("ISBN978-4-10-125332-9", "西の魔女が死んだ"),
-            Book("ISBN978-4-10-125332-9", "西の魔女が死んだ"),
-            Book("ISBN978-4-10-125332-9", "西の魔女が死んだ")
+            Book("ISBN978-4-10-125332-9", "西の魔女が死んだ", "梨木香歩"),
+            Book("ISBN978-4-10-125332-9", "西の魔女が死んだ","梨木香歩"),
+            Book("ISBN978-4-10-125332-9", "西の魔女が死んだ","梨木香歩")
         )
 
         val container = findViewById<LinearLayout>(R.id.bookshelfLayout)
@@ -41,7 +41,7 @@ class BookshelfActivity : AppCompatActivity() {
 
                 bookItem.setOnClickListener{
                     val intent = Intent(this, BookActivity::class.java).apply{
-                        putExtra("ISBN", book.isbn)
+                        putExtra("Book", book)
                     }
                     startActivity(intent)
                 }
