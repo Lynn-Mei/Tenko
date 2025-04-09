@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import com.nihonium.tenko.library.Book
 
 class BookshelfActivity : AppCompatActivity() {
@@ -35,8 +36,7 @@ class BookshelfActivity : AppCompatActivity() {
             bookPair.forEach { book ->
                 val bookItem = LayoutInflater.from(this)
                     .inflate(R.layout.bookshelf_book_layout, row, false)
-                val uri = Uri.parse("https://m.media-amazon.com/images/I/510ln1bHRhL.jpg")
-                bookItem.findViewById<ImageView>(R.id.bookCover).setImageURI(uri)
+                bookItem.findViewById<ImageView>(R.id.bookCover).setImageResource(book.cover)
                 bookItem.findViewById<TextView>(R.id.bookTitle).text = book.title
 
                 bookItem.setOnClickListener{

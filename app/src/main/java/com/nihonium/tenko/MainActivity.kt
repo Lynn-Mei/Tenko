@@ -1,5 +1,6 @@
 package com.nihonium.tenko
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -28,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        binding.buttontest.setOnClickListener { view ->
+            val intent = Intent(this, BookshelfActivity::class.java).apply{}
+            startActivity(intent)
         }
     }
 
