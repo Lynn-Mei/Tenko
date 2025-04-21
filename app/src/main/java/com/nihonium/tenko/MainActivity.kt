@@ -2,6 +2,7 @@ package com.nihonium.tenko
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -10,7 +11,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.HorizontalScrollView
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.nihonium.tenko.databinding.ActivityMainBinding
+import com.nihonium.tenko.library.Book
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,9 +31,12 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        val books = listOf(
+            Book("ISBN978-4-10-125332-9", "西の魔女が死んだ", "梨木香歩"),
+            Book("ISBN978-4-10-125332-9", "西の魔女が死んだ","梨木香歩"),
+            Book("ISBN978-4-10-125332-9", "西の魔女が死んだ","梨木香歩")
+        )
+        fillBookshelf(books)
 
         binding.buttontest.setOnClickListener { view ->
             val intent = Intent(this, BookshelfActivity::class.java).apply{}
@@ -51,9 +60,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+    private fun fillBookshelf(books: List<Book>){
+        val container = findViewById<LinearLayout>(R.id.main_bookshelf)
+        books.forEach{ book ->
+            val bookItem = LayoutInflater.from(this)
+                .inflate(R.layout.bookshelf_book_layout, container, false)
+            bookItem.findViewById<ImageView>(R.id.bookCover).setImageResource(book.cover)
+            bookItem.findViewById<TextView>(R.id.bookTitle).text = book.title
+
+            bookItem.setOnClickListener{
+                val intent = Intent(this, BookActivity::class.java).apply{
+                    putExtra("Book", book)
+                }
+                startActivity(intent)
+            }
+            container.addView(bookItem)
+        }
+
     }
 }
