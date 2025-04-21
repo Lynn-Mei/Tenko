@@ -2,6 +2,7 @@ package com.nihonium.tenko
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,11 +15,14 @@ import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nihonium.tenko.library.Book
+import com.nihonium.tenko.library.PagePicture
 import java.io.File
 
 class BookActivity : AppCompatActivity() {
     private var book: Book? = null
     private val CAMERA_PERMISSION_CODE = 100
+    private lateinit var photoFile: File
+    private lateinit var photoUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +46,24 @@ class BookActivity : AppCompatActivity() {
 
     private fun takePicture() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val photoFile = File(getExternalFilesDir(null), "photo_${System.currentTimeMillis()}.jpg")
-        val photoUri = FileProvider.getUriForFile(this, "${packageName}.fileprovider", photoFile)
+        photoFile = File(getExternalFilesDir(null), "photo_${System.currentTimeMillis()}.jpg")
+        photoUri = FileProvider.getUriForFile(this, "${packageName}.fileprovider", photoFile)
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
         startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            val processor = PagePicture()
+            processor.importPicture(photoFile)
+
+            processor.extractJapaneseTextFromImage{ extractedText -> runOnUiThread{
+                findViewById<TextView>(R.id.author).text = extractedText
+            }}
+        }
     }
 
     private fun requestCameraPermission() {
