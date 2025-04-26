@@ -11,25 +11,31 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import com.nihonium.tenko.databinding.ActivityMainBinding
 import com.nihonium.tenko.library.Book
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer)
+        val toolbar = findViewById<Toolbar>(R.id.maintoolbar)
+        setSupportActionBar(toolbar)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
         val books = listOf(
             Book("ISBN978-4-10-125332-9", "西の魔女が死んだ", "梨木香歩"),
@@ -38,7 +44,8 @@ class MainActivity : AppCompatActivity() {
         )
         fillBookshelf(books)
 
-        binding.buttontest.setOnClickListener { view ->
+        val buttontest = findViewById<Button>(R.id.buttontest)
+        buttontest.setOnClickListener { view ->
             val intent = Intent(this, BookshelfActivity::class.java).apply{}
             startActivity(intent)
         }
