@@ -49,6 +49,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, BookshelfActivity::class.java).apply{}
             startActivity(intent)
         }
+
+        val kanjiItem1 = findViewById<TextView>(R.id.menu_kanji)
+        kanjiItem1.setOnClickListener {
+            val intent = Intent(this, KanjiSearch::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
