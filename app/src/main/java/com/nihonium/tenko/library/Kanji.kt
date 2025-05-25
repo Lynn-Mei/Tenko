@@ -1,10 +1,10 @@
 package com.nihonium.tenko.library
 
 class Kanji {
-    private var kanji: String = ""
-    private var onyomi: MutableList<String> = mutableListOf()
-    private var kunyomi: MutableList<String> = mutableListOf()
-    private var meanings: MutableMap<Language, String> = mutableMapOf()
+    var kanji: String = ""
+    var onyomi: MutableList<String> = mutableListOf()
+    var kunyomi: MutableList<String> = mutableListOf()
+    var meanings: MutableMap<Language, String> = mutableMapOf()
 
     constructor(kanji: String){
         this.kanji = kanji
